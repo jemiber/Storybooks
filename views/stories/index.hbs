@@ -1,0 +1,37 @@
+<h1>Stories</h1>
+<div class="row">
+    {{#each stories}}
+        <div class="col s12 m4">
+            <div class="card">
+                <div class="card-image">
+                    {{{editIcon user ../user _id}}}
+                </div>
+                <div class="card-content center-align">
+                    <h5>{{title}}</h5>
+                    <p>{{truncate (stripTags body) 150}}</p> {{!--what goes in () hapens first, this is calling both functions and aplying them to the body and 150 is how long the text is going to be--}}
+                    <br>
+                    <div class="chip">
+                        <img src="{{user.image}}" alt="">
+                        <a href="/stories/user/{{user._id}}">{{user.displayName}}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-action center-align">
+                <a href="/stories/{{_id}}" class="btn grey">Read More</a>
+            </div>
+        </div>
+    {{else}}
+        <p>No stories to display</p>
+    {{/each}}
+</div>
+
+<!-- we are working inside the stories loop (stories is an object). editIcon is a
+function that we created in hbs.js that has many parameters that we are calling here:
+the storyUser is just going to be user here bc we are inside the stories loop,
+to get the loggedUser we need to create a global variable in app.js that can reference the logged user
+bc its out of scope. We have to set this variable as middleware and now it should work with ../user as
+an argument.
+the storyId is accesed with just _id bc we are inside the loop.
+
+if we want to parse html with handlebars we need to use 3x{}-->
+
